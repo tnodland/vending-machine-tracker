@@ -19,7 +19,6 @@ RSpec.describe "As a user" do
         expect(page).to have_content (root.name)
         expect(page).to have_content (root.price)
       end
-      save_and_open_page
     end
 
     it "should see the average price of all snacks" do
@@ -29,8 +28,9 @@ RSpec.describe "As a user" do
       root = dons.snacks.create(name: "Root Beer", price: 2.00)
 
       visit machine_path(dons)
+      # save_and_open_page
+      expect(page).to have_content ("Average Price: $#{dons.average_price}")
 
-      # expect(page).to have_content
     end
   end
 end
