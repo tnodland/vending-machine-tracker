@@ -5,9 +5,21 @@ RSpec.describe "As a user" do
     it "should see all of the snacks associated to that machine" do
       owner = Owner.create(name: "Sam's Snacks")
       dons  = owner.machines.create(location: "Don's Mixed Drinks")
-      dons.items.create(name: "Cream soda", price: 1.00)
-      dons.items.create(name: "Root Beer", price: 2.00)
-      binding.pry
+      cream = dons.snacks.create(name: "Cream soda", price: 1.00)
+      root = dons.snacks.create(name: "Root Beer", price: 2.00)
+
+      visit machine_path(dons)
+
+      # within "#snack-#{cream.id}" do
+        expect(page).to have_content (cream.name)
+        expect(page).to have_content (cream.price)
+      # end
+
+      # withing "#snack_#{root.id}" do
+        expect(page).to have_content (root.name)
+        expect(page).to have_content (root.price)
+      # end
+      save_and_open_page
     end
   end
 end
