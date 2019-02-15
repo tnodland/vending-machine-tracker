@@ -10,16 +10,27 @@ RSpec.describe "As a user" do
 
       visit machine_path(dons)
 
-      # within "#snack-#{cream.id}" do
+      within "#snack-#{cream.id}" do
         expect(page).to have_content (cream.name)
         expect(page).to have_content (cream.price)
-      # end
+      end
 
-      # withing "#snack_#{root.id}" do
+      within "#snack-#{root.id}" do
         expect(page).to have_content (root.name)
         expect(page).to have_content (root.price)
-      # end
+      end
       save_and_open_page
+    end
+
+    it "should see the average price of all snacks" do
+      owner = Owner.create(name: "Sam's Snacks")
+      dons  = owner.machines.create(location: "Don's Mixed Drinks")
+      cream = dons.snacks.create(name: "Cream soda", price: 1.00)
+      root = dons.snacks.create(name: "Root Beer", price: 2.00)
+
+      visit machine_path(dons)
+
+      # expect(page).to have_content
     end
   end
 end
