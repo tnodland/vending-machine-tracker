@@ -9,4 +9,6 @@ feature 'When a user visits a vending machine show page' do
 
     expect(page).to have_content("Don's Mixed Drinks Vending Machine")
   end
+
+  
 end
